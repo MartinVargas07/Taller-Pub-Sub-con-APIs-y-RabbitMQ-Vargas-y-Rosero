@@ -5,8 +5,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.15</version>
-        <relativePath/>
-    </parent>
+        <relativePath/> </parent>
     <groupId>com.stremedu.publisher</groupId>
     <artifactId>publisher-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -23,6 +22,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
     </dependencies>
     <build>

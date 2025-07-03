@@ -4,8 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SubscriberNotificationsApplication {
+// NOMBRE DE LA CLASE CORREGIDO
+public class SubscriberPlagiarismApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SubscriberNotificationsApplication.class, args);
+        SpringApplication.run(SubscriberPlagiarismApplication.class, args);
     }
 }

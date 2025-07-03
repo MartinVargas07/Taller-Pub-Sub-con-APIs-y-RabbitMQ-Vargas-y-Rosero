@@ -7,11 +7,11 @@
         <version>2.7.15</version>
         <relativePath/>
     </parent>
-    <groupId>com.stremedu.notifications</groupId>
-    <artifactId>subscriber-notifications</artifactId>
+    <groupId>com.stremedu.plagiarism</groupId>
+    <artifactId>subscriber-plagiarism</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>subscriber-notifications</name>
-    <description>Suscriptor para notificar al profesor</description>
+    <name>subscriber-plagiarism</name>
+    <description>Suscriptor para analizar plagio</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -20,6 +20,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+        <dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.fasterxml.jackson.datatype</groupId>
+    <artifactId>jackson-datatype-jsr310</artifactId>
+</dependency>
     </dependencies>
     <build>
         <plugins>
