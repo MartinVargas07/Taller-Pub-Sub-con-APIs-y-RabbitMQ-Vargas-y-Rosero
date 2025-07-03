@@ -1,44 +1,55 @@
-Taller: Arquitectura Pub/Sub con APIs y RabbitMQ
+🚀 Taller: Arquitectura Pub/Sub con APIs y RabbitMQ
 Integrantes: Martín Vargas, Kevin Rosero
 
-1. Descripción Técnica
-Este repositorio contiene una implementación de la arquitectura Publicador/Suscriptor utilizando Spring Boot y RabbitMQ. El sistema simula el procesamiento asíncrono de tareas estudiantiles a través de tres microservicios independientes:
+1. Descripción General del Proyecto
+Este repositorio contiene una implementación de la arquitectura Publicador/Suscriptor utilizando Spring Boot y RabbitMQ. El sistema simula el procesamiento asíncrono de tareas estudiantiles a través de tres microservicios independientes, demostrando un caso de uso real para sistemas distribuidos y desacoplados.
 
-publisher-api: Un servicio REST que expone un endpoint POST /subir-tarea para recibir datos y publicarlos en un exchange de RabbitMQ.
+El objetivo principal es mostrar cómo los eventos (en este caso, la entrega de una tarea) pueden ser procesados por múltiples servicios en paralelo sin que estos tengan conocimiento directo entre sí, aumentando la escalabilidad y resiliencia del sistema.
 
-subscriber-notifications: Un servicio de consola que se suscribe al exchange para recibir una copia de los mensajes y simular el envío de una notificación.
+2. Arquitectura y Componentes
+La solución está compuesta por los siguientes microservicios:
 
-subscriber-plagiarism: Un segundo servicio de consola que también se suscribe al mismo exchange para recibir los mensajes y simular un análisis de plagio.
+publisher-api
 
-La comunicación entre los servicios es gestionada por RabbitMQ, asegurando el desacoplamiento total entre el publicador y los múltiples suscriptores. El formato de intercambio de mensajes es JSON.
+Rol: Publicador.
 
-2. Requisitos Previos
- Java 11 o superior
+Descripción: Es un servicio REST construido con Spring Boot que expone un endpoint POST /subir-tarea. Su única responsabilidad es recibir los datos de una nueva tarea, convertirlos a formato JSON y publicarlos en un exchange de RabbitMQ. Actúa como el punto de entrada al flujo de procesamiento asíncrono.
 
- Apache Maven 3.6+
+subscriber-notifications
 
- Docker Desktop
+Rol: Suscriptor.
 
-3. Estructura del Repositorio
+Descripción: Es un servicio de consola que se suscribe al exchange de RabbitMQ. Al recibir una copia del mensaje de la tarea, simula el envío de una notificación por correo electrónico al profesor correspondiente, demostrando una acción de negocio que se dispara a raíz del evento.
+
+subscriber-plagiarism
+
+Rol: Suscriptor.
+
+Descripción: Es un segundo servicio de consola que también se suscribe al mismo exchange. Su función es recibir el mismo mensaje de la tarea y simular un proceso de análisis de plagio sobre el documento entregado. Opera de forma completamente independiente al servicio de notificaciones.
+
+3. Requisitos de Software
+✅ Java 11 o superior
+
+✅ Apache Maven 3.6+
+
+✅ Docker Desktop
+
+4. Estructura del Repositorio
 El proyecto está organizado en tres carpetas principales, cada una conteniendo un microservicio de Maven independiente:
 
-/publisher-api
+Taller-PubSub-APIs/
+├── 📂 publisher-api/
+│   └── ... (Proyecto del servicio publicador)
+├── 📂 subscriber-notifications/
+│   └── ... (Proyecto del suscriptor de notificaciones)
+└── 📂 subscriber-plagiarism/
+    └── ... (Proyecto del suscriptor de análisis de plagio)
 
-Descripción: Proyecto del servicio publicador (API REST).
-
-/subscriber-notifications
-
-Descripción: Proyecto del servicio suscriptor de notificaciones.
-
-/subscriber-plagiarism
-
-Descripción: Proyecto del servicio suscriptor de análisis de plagio.
-
-4. Instrucciones de Compilación y Ejecución
-Siga estos pasos en orden para levantar y probar el sistema completo.
+5. Guía de Despliegue y Ejecución (Paso a Paso)
+Siga estas instrucciones en orden para levantar y probar el sistema completo.
 
 Paso 1: Levantar el Broker de Mensajería (RabbitMQ)
-Asegúrese de que Docker Desktop esté en ejecución. Luego, abra una terminal y ejecute el siguiente comando para iniciar un contenedor de RabbitMQ con un usuario administrador (admin/admin):
+Asegúrese de que Docker Desktop esté en ejecución. Luego, abra una terminal y ejecute el siguiente comando para iniciar un contenedor de RabbitMQ. Este comando configura un usuario admin con contraseña admin para facilitar el acceso.
 
 docker run -d --name rabbitmq-taller-apis -p 5672:5672 -p 15672:15672 -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:3-management
 
@@ -87,7 +98,7 @@ Con los tres servicios corriendo, abra una cuarta terminal para enviar una petic
 
 curl -X POST http://localhost:8080/subir-tarea -H "Content-Type: application/json" -d "{\"estudiante\": \"Juan Perez\", \"curso\": \"Integracion de Sistemas\", \"archivo\": \"tarea1.docx\", \"fechaEnvio\": \"2025-07-02T19:00:00\"}"
 
-5. Resultado Esperado
+6. Resultado Esperado
 La terminal de curl debe devolver una respuesta exitosa: Tarea enviada para procesamiento!.
 
 La terminal del publisher-api debe mostrar el log: Publicando mensaje: Tarea{...}.
