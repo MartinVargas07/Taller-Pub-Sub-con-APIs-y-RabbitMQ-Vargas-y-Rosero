@@ -2,7 +2,7 @@ Taller: Arquitectura Pub/Sub con APIs y RabbitMQ
 Integrantes: Martín Vargas, Kevin Rosero
 
 1. Descripción Técnica
-Este repositorio contiene tres microservicios independientes desarrollados con Spring Boot que implementan una arquitectura de Publicador/Suscriptor para procesar eventos de entrega de tareas de forma asíncrona.
+Este repositorio contiene una implementación de la arquitectura Publicador/Suscriptor utilizando Spring Boot y RabbitMQ. El sistema simula el procesamiento asíncrono de tareas estudiantiles a través de tres microservicios independientes:
 
 publisher-api: Un servicio REST que expone un endpoint POST /subir-tarea para recibir datos y publicarlos en un exchange de RabbitMQ.
 
@@ -10,22 +10,29 @@ subscriber-notifications: Un servicio de consola que se suscribe al exchange par
 
 subscriber-plagiarism: Un segundo servicio de consola que también se suscribe al mismo exchange para recibir los mensajes y simular un análisis de plagio.
 
-La comunicación entre los servicios es gestionada por RabbitMQ, asegurando el desacoplamiento entre el publicador y los múltiples suscriptores. El formato de intercambio de mensajes es JSON.
+La comunicación entre los servicios es gestionada por RabbitMQ, asegurando el desacoplamiento total entre el publicador y los múltiples suscriptores. El formato de intercambio de mensajes es JSON.
 
 2. Requisitos Previos
-Java 11 o superior
+ Java 11 o superior
 
-Apache Maven 3.6+
+ Apache Maven 3.6+
 
-Docker Desktop
+ Docker Desktop
 
 3. Estructura del Repositorio
-La estructura de carpetas del proyecto es la siguiente:
+El proyecto está organizado en tres carpetas principales, cada una conteniendo un microservicio de Maven independiente:
 
-Taller-PubSub-APIs/
-├── publisher-api/              # Proyecto del servicio publicador (API REST)
-├── subscriber-notifications/   # Proyecto del servicio suscriptor de notificaciones
-└── subscriber-plagiarism/      # Proyecto del servicio suscriptor de análisis de plagio
+/publisher-api
+
+Descripción: Proyecto del servicio publicador (API REST).
+
+/subscriber-notifications
+
+Descripción: Proyecto del servicio suscriptor de notificaciones.
+
+/subscriber-plagiarism
+
+Descripción: Proyecto del servicio suscriptor de análisis de plagio.
 
 4. Instrucciones de Compilación y Ejecución
 Siga estos pasos en orden para levantar y probar el sistema completo.
@@ -80,7 +87,7 @@ Con los tres servicios corriendo, abra una cuarta terminal para enviar una petic
 
 curl -X POST http://localhost:8080/subir-tarea -H "Content-Type: application/json" -d "{\"estudiante\": \"Juan Perez\", \"curso\": \"Integracion de Sistemas\", \"archivo\": \"tarea1.docx\", \"fechaEnvio\": \"2025-07-02T19:00:00\"}"
 
-Resultado Esperado
+5. Resultado Esperado
 La terminal de curl debe devolver una respuesta exitosa: Tarea enviada para procesamiento!.
 
 La terminal del publisher-api debe mostrar el log: Publicando mensaje: Tarea{...}.
