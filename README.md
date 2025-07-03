@@ -20,6 +20,8 @@ Apache Maven 3.6+
 Docker Desktop
 
 3. Estructura del Repositorio
+La estructura de carpetas del proyecto es la siguiente:
+
 Taller-PubSub-APIs/
 ├── publisher-api/              # Proyecto del servicio publicador (API REST)
 ├── subscriber-notifications/   # Proyecto del servicio suscriptor de notificaciones
@@ -57,19 +59,16 @@ Paso 3: Ejecución de los Microservicios
 Necesitará tres terminales separadas para ejecutar cada servicio de forma simultánea.
 
 Terminal 1: Iniciar el Publicador (API)
-
 # Desde la carpeta raíz Taller-PubSub-APIs/
 cd publisher-api
 mvn spring-boot:run
 
 Terminal 2: Iniciar el Suscriptor de Notificaciones
-
 # Desde la carpeta raíz Taller-PubSub-APIs/
 cd subscriber-notifications
 mvn spring-boot:run
 
 Terminal 3: Iniciar el Suscriptor de Plagio
-
 # Desde la carpeta raíz Taller-PubSub-APIs/
 cd subscriber-plagiarism
 mvn spring-boot:run
