@@ -1,4 +1,4 @@
-🚀 Taller: Arquitectura Pub/Sub con APIs y RabbitMQ
+Taller: Arquitectura Pub/Sub con APIs y RabbitMQ
 Integrantes: Martín Vargas, Kevin Rosero
 
 1. Descripción General del Proyecto
@@ -28,22 +28,19 @@ Rol: Suscriptor.
 Descripción: Es un segundo servicio de consola que también se suscribe al mismo exchange. Su función es recibir el mismo mensaje de la tarea y simular un proceso de análisis de plagio sobre el documento entregado. Opera de forma completamente independiente al servicio de notificaciones.
 
 3. Requisitos de Software
-✅ Java 11 o superior
+Java 11 o superior
 
-✅ Apache Maven 3.6+
+Apache Maven 3.6+
 
-✅ Docker Desktop
+Docker Desktop
 
 4. Estructura del Repositorio
 El proyecto está organizado en tres carpetas principales, cada una conteniendo un microservicio de Maven independiente:
 
 Taller-PubSub-APIs/
-├── 📂 publisher-api/
-│   └── ... (Proyecto del servicio publicador)
-├── 📂 subscriber-notifications/
-│   └── ... (Proyecto del suscriptor de notificaciones)
-└── 📂 subscriber-plagiarism/
-    └── ... (Proyecto del suscriptor de análisis de plagio)
+├── publisher-api/              # Proyecto del servicio publicador (API REST)
+├── subscriber-notifications/   # Proyecto del suscriptor de notificaciones
+└── subscriber-plagiarism/      # Proyecto del suscriptor de análisis de plagio
 
 5. Guía de Despliegue y Ejecución (Paso a Paso)
 Siga estas instrucciones en orden para levantar y probar el sistema completo.
